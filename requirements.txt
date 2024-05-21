@@ -1,10 +1,2 @@
-langchain
-transformers
-langchain_nvidia_ai_endpoints
-llama_index
-langchain_core
-python-dotenv
 fastapi
 pydantic
-llama-index-embeddings-huggingface
-llama-index-llms-langchain
