@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from app.chat import query_chatbot_with_prompt, load_model
+from chat import query_chatbot_with_prompt, load_model
 
 app = FastAPI()
 
