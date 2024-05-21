@@ -5,4 +5,4 @@ langchain_core
 python-dotenv
 fastapi
 pydantic
-
+llama-index-llms-langchain
