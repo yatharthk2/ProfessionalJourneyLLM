@@ -5,4 +5,5 @@ langchain_core
 python-dotenv
 fastapi
 pydantic
+llama-index-embeddings-huggingface
 llama-index-llms-langchain
