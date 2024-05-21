@@ -22,7 +22,8 @@ def load_model():
     # Initialize the ChatNVIDIA instance with the retrieved API key
     llm = ChatNVIDIA(model="mixtral_8x7b", api_key=api_key)
 
-    Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
+    # Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
+    Settings.embed_model = HuggingFaceEmbedding(model_name="distilbert-base-uncased")
     Settings.llm = llm
 
     documents = SimpleDirectoryReader('pdf/').load_data()
