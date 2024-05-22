@@ -17,3 +17,4 @@ async def query_chatbot(request: QueryRequest):
     if not response:
         raise HTTPException(status_code=500, detail="No response from the chatbot")
     return {"response": response}
+
