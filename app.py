@@ -61,22 +61,22 @@ if 'conversation' not in st.session_state:
 st.title("LLM Assistant for Recruiters")
 st.markdown("""
     <div class="main">
-        <p> Hi, This is Yatharth ask any question about my professional journey to the LLM assistant :)</p>
+        <p> Hi, This is Yatharth feel free to ask any question about my professional journey :) </p>
     </div>
     """, unsafe_allow_html=True)
 
 # Sidebar for user input
-st.sidebar.header("Configuration")
-st.sidebar.markdown("Use the options below to configure your query.")
-question = st.sidebar.text_input("Enter your question:")
+st.sidebar.header("Question")
+# st.sidebar.markdown("Use the options below to configure your query.")
+question = st.sidebar.text_input("Enter your question here:")
 
-if st.sidebar.button("Ask"):
+if st.sidebar.button("Hit Here to Ask"):
     if question:
         with st.spinner('Processing...'):
             try:
                 response = query_chatbot_with_prompt(question)
                 st.session_state.conversation.append({"role": "You", "message": question})
-                st.session_state.conversation.append({"role": "Assistant", "message": response})
+                st.session_state.conversation.append({"role": "Yatharth", "message": response})
             except Exception as e:
                 st.sidebar.error(f"No response from the assistant. Error: {e}")
     else:
