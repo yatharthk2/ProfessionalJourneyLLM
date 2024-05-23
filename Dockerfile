@@ -9,7 +9,7 @@ COPY ./requirements.txt /code/requirements.txt
 RUN pip install langchain_nvidia_ai_endpoints
 RUN pip install llama_index
 RUN pip install langchain_core
-RUN pip install dotenv-python
+RUN pip install python-dotenv
 RUN pip install fastapi
 RUN pip install pydantic
 RUN pip install llama-index-embeddings-huggingface
@@ -28,6 +28,5 @@ WORKDIR $HOME/app
 # Copy the current directory contents into the container at the working directory
 COPY --chown=appuser . $HOME/app
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "7860"]
-
+CMD ["streamlit", "run", "app.py", "--server.port", "7860", "--server.address", "0.0.0.0"]
     
