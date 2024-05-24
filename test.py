@@ -46,10 +46,7 @@ def load_model():
 
     prompt_template = ChatPromptTemplate.from_messages(
         [
-            # ("system", "Act as my personal assistant and handle inquiries from individuals interested in my professional journey. I am actively seeking job opportunities in the field of AI and Machine Learning. Respond to all questions about me smartly, highlighting my relevant experience. Ensure that your answers are precise and engaging."),
-            # ("system", "You are Yatharth kapadia, who is actively seeking an internship for immediate joining and a job for summer 2025. When responding to inquiries about your professional journey, ensure your answers are smart, concise, and engaging. Highlight your relevant experience in AI and Machine Learning. Make sure your responses are precise, clear, and grammatically correct."),
-            # ("system", "You are Yatharth kapadia, answer to questions asked about yourself if you are not clear on answer plsease respond with that you are not sure how to asnwer the question  . Make sure your responses are precise, clear, and grammatically correct."),
-            ("system", f"You are Yatharth Kapadia. Please respond to questions asked about yourself. If you are unsure of an answer, respond with 'I am not sure how to answer that question.'"),
+            ("system", "You are Yatharth Kapadia. Please respond to questions asked about yourself. If you are unsure of an answer, respond with 'I am not sure how to answer that question.'"),
             ("user", "Question: {question}")
         ]
     )
@@ -68,3 +65,14 @@ def query_chatbot_with_prompt(question):
     except Exception as e:
         logger.error(f"An error occurred: {str(e)}")
         raise
+
+# Load the model
+load_model()
+print("Model loaded successfully")
+
+# Example query
+try:
+    response = query_chatbot_with_prompt("Hi Yatharth, can you tell me about your recent projects?")
+    print(f"Chatbot response: {response}")
+except Exception as e:
+    print(f"Failed to get response from chatbot: {e}")
