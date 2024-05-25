@@ -1,4 +1,3 @@
-import os
 import streamlit as st
 from chat import query_chatbot_with_prompt, load_model
 
@@ -14,8 +13,8 @@ st.markdown(
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        color: #000000;  /* Set text color to black */
-        border-left: 5px solid #800080;  /* Purple accent for the introductory block */
+        color: #000000;
+        border-left: 5px solid #800080;
     }
     .stTextInput, .stButton {
         margin-top: 20px;
@@ -40,10 +39,10 @@ st.markdown(
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
     .you {
-        border-left: 5px solid #FF0000;  /* Red accent for the 'You' block */
+        border-left: 5px solid #FF0000;
     }
     .assistant {
-        border-left: 5px solid #4CAF50;  /* Green accent for the 'Assistant' block */
+        border-left: 5px solid #4CAF50;
     }
     body {
         background-color: #e6e6e6;
@@ -61,16 +60,14 @@ if 'conversation' not in st.session_state:
 st.title("LLM Assistant for Recruiters")
 st.markdown("""
     <div class="main">
-        <p> Hi, This is Yatharth feel free to ask any question about my professional journey :) </p>
+        <p> Hi, This is Yatharth. Feel free to ask any question about my professional journey :) </p>
     </div>
     """, unsafe_allow_html=True)
 
 # Sidebar for user input
-st.sidebar.header("Question")
-# st.sidebar.markdown("Use the options below to configure your query.")
+st.sidebar.header("Ask Your Own Question")
 question = st.sidebar.text_input("Enter your question here:")
-
-if st.sidebar.button("Hit Here to Ask"):
+if st.sidebar.button("Submit Question"):
     if question:
         with st.spinner('Processing...'):
             try:
@@ -81,6 +78,19 @@ if st.sidebar.button("Hit Here to Ask"):
                 st.sidebar.error(f"No response from the assistant. Error: {e}")
     else:
         st.sidebar.error("Please enter a question.")
+
+# Display Quick Questions as buttons
+st.sidebar.header("Quick Questions")
+quick_questions = ["What is your current role?", "What projects have you worked on?", "Can you explain your experience with machine learning?"]
+for question in quick_questions:
+    if st.sidebar.button(question):
+        with st.spinner('Processing...'):
+            try:
+                response = query_chatbot_with_prompt(question)
+                st.session_state.conversation.append({"role": "You", "message": question})
+                st.session_state.conversation.append({"role": "Yatharth", "message": response})
+            except Exception as e:
+                st.sidebar.error(f"No response from the assistant. Error: {e}")
 
 # Display conversation history only if there are responses
 if st.session_state.conversation:
