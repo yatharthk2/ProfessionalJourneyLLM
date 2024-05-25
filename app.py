@@ -57,12 +57,17 @@ if 'conversation' not in st.session_state:
     st.session_state.conversation = []
 
 # App title and description
-st.title("LLM Assistant for Recruiters")
+st.markdown("<h2 style='color: black;'>Yatharth's Professional Journey Guide</h2>", unsafe_allow_html=True)
 st.markdown("""
     <div class="main">
         <p> Hi, This is Yatharth. Feel free to ask any question about my professional journey :) </p>
     </div>
     """, unsafe_allow_html=True)
+
+# Add Refresh Conversation button below the introductory message
+if st.button("Refresh Conversation"):
+    st.session_state.conversation = []
+    st.experimental_rerun()
 
 # Sidebar for user input
 st.sidebar.header("Ask Your Own Question")
@@ -82,12 +87,12 @@ if st.sidebar.button("Submit Question"):
 # Display Quick Questions as buttons
 st.sidebar.header("Quick Questions")
 quick_questions = ["What is your current role?", "What projects have you worked on?", "Can you explain your experience with machine learning?"]
-for question in quick_questions:
-    if st.sidebar.button(question):
+for q in quick_questions:
+    if st.sidebar.button(q):
         with st.spinner('Processing...'):
             try:
-                response = query_chatbot_with_prompt(question)
-                st.session_state.conversation.append({"role": "You", "message": question})
+                response = query_chatbot_with_prompt(q)
+                st.session_state.conversation.append({"role": "You", "message": q})
                 st.session_state.conversation.append({"role": "Yatharth", "message": response})
             except Exception as e:
                 st.sidebar.error(f"No response from the assistant. Error: {e}")
